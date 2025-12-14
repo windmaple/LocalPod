@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Now Playing</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar hiding if needed */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Glassmorphism utility */
+        .glass-panel {
+            background: rgba(16, 22, 34, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* Material Symbols utility */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-light {
+            font-variation-settings: 'FILL' 0, 'wght' 300;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white h-screen overflow-hidden select-none">
+<!-- Ambient Background Blur -->
+<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute top-[-20%] left-[-20%] w-[140%] h-[80%] opacity-30 blur-[100px] bg-gradient-to-br from-primary/40 via-purple-900/40 to-transparent dark:from-primary/20 dark:via-blue-900/20"></div>
+</div>
+<!-- Main Container -->
+<div class="relative z-10 flex flex-col h-full max-w-md mx-auto w-full px-6 pt-2 pb-8 justify-between">
+<!-- Top Handle & Header -->
+<div class="flex flex-col w-full shrink-0">
+<!-- BottomSheet Handle -->
+<div class="flex w-full justify-center py-2 mb-2">
+<div class="h-1.5 w-12 rounded-full bg-slate-300 dark:bg-slate-700/50"></div>
+</div>
+<!-- Top AppBar -->
+<div class="flex items-center justify-between py-2">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">keyboard_arrow_down</span>
+</button>
+<h2 class="text-sm font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400">Now Playing</h2>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 icon-light">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Hero Image -->
+<div class="flex-1 flex flex-col items-center justify-center min-h-0 py-6">
+<div class="relative w-full aspect-square max-h-[360px] max-w-[360px] rounded-2xl shadow-2xl overflow-hidden group">
+<!-- Image -->
+<div class="w-full h-full bg-cover bg-center transform transition-transform duration-700 group-hover:scale-105" data-alt="Abstract colorful geometric pattern representing technology and design" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDXMxZUPuopDFK3FWl72Uw09CGIi69gOlCp8xp6NVBzQNYLpOWQ3PjwkOui2muxoxB1gLzZRGOepaYJevn7UEpTuFTHSpUZpeHlxZqAmu_qsGGskVfbKy-GtuOD6U0A7hIfZ3eNmlUmNRDGJZFMHRzu5stFAynIhk_GxNymcxleHAc1624WyvCE93U0UGvTyQnrK2KjlBCIbvnc2xy9AhdyrfjTwAyTTVzXrKU3wxLZEa92iHBrk7LEz3x5r-_ld_3tKVxCfGg_gEk');">
+</div>
+<!-- Subtle inner border for contrast -->
+<div class="absolute inset-0 border border-white/10 rounded-2xl pointer-events-none"></div>
+</div>
+</div>
+<!-- Metadata & Controls Container -->
+<div class="flex flex-col w-full shrink-0 gap-8">
+<!-- Titles -->
+<div class="flex flex-col items-start gap-1">
+<!-- HeadlineText -->
+<div class="w-full overflow-hidden">
+<h2 class="text-2xl font-bold leading-tight truncate pr-4 text-slate-900 dark:text-white">
+                        The Future of AI Design Systems
+                    </h2>
+</div>
+<!-- TitleText -->
+<div class="flex items-center justify-between w-full">
+<h3 class="text-lg font-medium text-slate-500 dark:text-slate-400 truncate">
+                        Tech Talk Daily
+                    </h3>
+<!-- Like/Heart Button -->
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined icon-light">favorite</span>
+</button>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="flex flex-col gap-2 w-full group/slider">
+<!-- Slider Track -->
+<div class="relative h-1.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full cursor-pointer">
+<!-- Progress Fill -->
+<div class="absolute top-0 left-0 h-full w-[35%] bg-primary rounded-full z-10"></div>
+<!-- Thumb (Hidden by default, visible on group hover) -->
+<div class="absolute top-1/2 left-[35%] -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-md scale-0 group-hover/slider:scale-100 transition-transform duration-200 z-20"></div>
+</div>
+<!-- Timestamps -->
+<div class="flex justify-between items-center text-xs font-medium text-slate-400 dark:text-slate-500 tabular-nums">
+<span>12:34</span>
+<span>-45:20</span>
+</div>
+</div>
+<!-- Main Playback Controls -->
+<div class="flex items-center justify-center gap-6 w-full">
+<!-- Skip Back 15s -->
+<button class="p-3 text-slate-800 dark:text-white hover:text-slate-600 dark:hover:text-slate-300 transition-colors rounded-full hover:bg-black/5 dark:hover:bg-white/5">
+<span class="material-symbols-outlined text-[32px] icon-light" style="font-variation-settings: 'opsz' 48;">replay_10</span>
+</button>
+<!-- Play/Pause Button -->
+<button class="flex items-center justify-center w-20 h-20 bg-primary text-white rounded-full shadow-lg shadow-primary/30 hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<!-- Skip Forward 15s -->
+<button class="p-3 text-slate-800 dark:text-white hover:text-slate-600 dark:hover:text-slate-300 transition-colors rounded-full hover:bg-black/5 dark:hover:bg-white/5">
+<span class="material-symbols-outlined text-[32px] icon-light" style="font-variation-settings: 'opsz' 48;">forward_10</span>
+</button>
+</div>
+<!-- Secondary Controls (Volume & Extras) -->
+<div class="flex flex-col gap-6 pt-2">
+<!-- Volume Slider Row -->
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 text-sm">volume_mute</span>
+<div class="relative h-1 flex-1 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full w-[70%] bg-slate-400 dark:bg-slate-400 rounded-full"></div>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">volume_up</span>
+</div>
+<!-- Bottom Actions Row -->
+<div class="flex items-center justify-between px-4">
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">speed</span>
+<span class="text-[10px] font-medium">1.0x</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">bedtime</span>
+<span class="text-[10px] font-medium">Sleep</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">playlist_play</span>
+<span class="text-[10px] font-medium">Queue</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">cast</span>
+<span class="text-[10px] font-medium">Cast</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Podcast Library</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1c2333", // Slightly lighter than background-dark for cards/panels
+                        "border-dark": "#324467",
+                        "text-secondary": "#92a4c9"
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit to blend in */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #324467; 
+            border-radius: 3px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased overflow-hidden">
+<div class="relative flex h-screen w-full flex-col overflow-hidden text-[#111418] dark:text-white">
+<!-- Header Section -->
+<header class="flex-none px-4 pt-6 pb-2 bg-background-light dark:bg-background-dark z-10">
+<div class="flex items-center justify-between mb-2">
+<!-- Large Title -->
+<h1 class="text-3xl font-bold tracking-tight">Local Episodes</h1>
+<!-- Sort Button -->
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-2xl">sort</span>
+</button>
+</div>
+<!-- Metadata Subtitle -->
+<p class="text-text-secondary text-sm font-medium">34 episodes found</p>
+</header>
+<!-- Search Bar -->
+<div class="flex-none px-4 py-2">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-secondary">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 rounded-lg border-none bg-white dark:bg-[#232f48] text-base placeholder-text-secondary focus:ring-2 focus:ring-primary focus:outline-none shadow-sm dark:shadow-none" placeholder="Search titles or artists..." type="text" value=""/>
+</div>
+</div>
+<!-- Scrollable Content Area -->
+<main class="flex-1 overflow-y-auto pb-32">
+<!-- Permissions Banner (Conditional) -->
+<div class="px-4 py-4">
+<div class="flex flex-col gap-4 rounded-xl border border-border-dark bg-surface-dark p-5 shadow-sm">
+<div class="flex items-start gap-4">
+<div class="p-2 rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">folder_open</span>
+</div>
+<div class="flex-1">
+<h3 class="text-base font-bold leading-tight mb-1">File Access Required</h3>
+<p class="text-text-secondary text-sm leading-normal">Allow storage access to find and play local audio files on your device.</p>
+</div>
+</div>
+<div class="flex justify-end">
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-6 bg-primary text-white text-sm font-medium leading-normal hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30">
+                            Allow Access
+                        </button>
+</div>
+</div>
+</div>
+<!-- List Items -->
+<div class="flex flex-col gap-1">
+<!-- Item 1 -->
+<div class="group relative flex items-center gap-4 px-4 py-3 hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<div class="relative shrink-0">
+<div class="h-[72px] w-[72px] rounded-lg bg-cover bg-center shadow-md" data-alt="Abstract generic news podcast cover art" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrZlxuTU5Cppvi1h9d6FCJjdssFuXk9JPSUBwEvwQWni3JwFj-rbhw1o1gQEn6eIm4h7-leQGf0VesUcjL0fYXNKPdD2aL_sDQx_mFKV8iAyiaiU04-b-eDacAk9Cm1F8YkM2OPnJukuusVDOs1XGl0PzJwVDeYP5k45FXZr4RgIveskWRO4650yzbfgklpwDCNTTNCaZh48V8WbNlKdzVKYrH2sCYhmYEt458arOouafDCW7L-StFF4hCDJPi2FtGD02P3Lh7hSA');"></div>
+<!-- Play overlay on hover -->
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
+<span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<h3 class="text-base font-bold leading-tight truncate pr-2">The Daily: The future of AI</h3>
+<p class="text-text-secondary text-sm font-normal truncate mt-1">New York Times</p>
+<p class="text-text-secondary text-xs font-medium mt-1">24m remaining • Yesterday</p>
+</div>
+<div class="shrink-0 flex items-center">
+<button class="text-text-secondary hover:text-white p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group relative flex items-center gap-4 px-4 py-3 hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<div class="relative shrink-0">
+<div class="h-[72px] w-[72px] rounded-lg bg-cover bg-center shadow-md" data-alt="Purple abstract pattern representing design podcast" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCVbHcmgz4DWJFHcVt605fXleLDFdtd2KiFapWs1QZ9gkfQC5LBkSz80YsDA8WaaSY3MDzas_DplMoU7NV-9v9F72Q3MePF7TVe0dzjkRXYF-A9sKs8FFZ-eiqnPXKpfcNfO1otnk-hzShcAQhFPdVR0c_391v4CMdwE5M4o4eZ9EBd8WmdV-aa0djkhsTYIJRn9ovagrvIbGwwm-jFLrfSPNJqT_4nFaL0e50YcT3MYoTBIvsc94AD3nh1_f8vQKFrcY-MaKc0yYQ');"></div>
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
+<span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<h3 class="text-base font-bold leading-tight truncate pr-2">Design Matters #102</h3>
+<p class="text-text-secondary text-sm font-normal truncate mt-1">Debbie Millman</p>
+<p class="text-green-500 text-xs font-medium mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Played
+                        </p>
+</div>
+<div class="shrink-0 flex items-center">
+<button class="text-text-secondary hover:text-white p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group relative flex items-center gap-4 px-4 py-3 hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<div class="relative shrink-0">
+<div class="h-[72px] w-[72px] rounded-lg bg-cover bg-center shadow-md grayscale opacity-80" data-alt="Monochrome brain illustration for science podcast" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsq_hnhPYldLdm2kfI7klLtWUrTlR_j0My1G7CsteY5SNJWKISSiLGIvFdp17jH8egFFPy9ExRzfpOjQkJjqlC5iqnIo7sHGvh_G9qOFKbpDPfklOXtVKD6qw6CgcMCDeuB2TK_WtRNzHSlLR2bma2ffuswYKr47PoVaPSKEtdGt_wEtwNXXfqF9VdtZAhq6kyQ3F1H3QwJdSuUu_rZIak8GYcHmqb5xFj36MJU3WZAczwdyiJz5nI1xfAi5elwz1lyjBBx5obyk8');"></div>
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
+<span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<h3 class="text-base font-bold leading-tight truncate pr-2">Huberman Lab: Sleep Toolkit</h3>
+<p class="text-text-secondary text-sm font-normal truncate mt-1">Scicomm Media</p>
+<p class="text-text-secondary text-xs font-medium mt-1">1h 45m • 2 days ago</p>
+</div>
+<div class="shrink-0 flex items-center">
+<button class="text-text-secondary hover:text-white p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="group relative flex items-center gap-4 px-4 py-3 hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<div class="relative shrink-0">
+<!-- Placeholder for missing artwork -->
+<div class="h-[72px] w-[72px] rounded-lg bg-gradient-to-br from-primary to-[#0a3080] flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-white/50 text-3xl">podcasts</span>
+</div>
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
+<span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<h3 class="text-base font-bold leading-tight truncate pr-2">Darknet Diaries: Ep 99</h3>
+<p class="text-text-secondary text-sm font-normal truncate mt-1">Jack Rhysider</p>
+<p class="text-text-secondary text-xs font-medium mt-1">52m • Last week</p>
+</div>
+<div class="shrink-0 flex items-center">
+<button class="text-text-secondary hover:text-white p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="group relative flex items-center gap-4 px-4 py-3 hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<div class="relative shrink-0">
+<div class="h-[72px] w-[72px] rounded-lg bg-cover bg-center shadow-md" data-alt="Yellow background with geometric shapes" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQczmqgDfTmcvLC1by4qiLg3oFJJIOr95ic-esWtXv4E2VO5aQvOwURpC41qYhjdFPp_BH5HQbFDeqyOhzCjNT_dGX9Nbm6PdSDmOMwE_mSG_wrza4pNPomP2TV2j27oO5jDxdGw6Qh8nnDLSBfgG0A6JSpYYZB7I1Ui1UsF1T6Qb8hFV216VF-MBPtVyeBcM2mlqq0ujnQTo8BKsU7qYR80YyUFp4nSdSU8jOTOkv9RnUKcQngwRr6ZzaQN6yaEr3RltmgN6BrDk');"></div>
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
+<span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<h3 class="text-base font-bold leading-tight truncate pr-2">99% Invisible: The Power of Design</h3>
+<p class="text-text-secondary text-sm font-normal truncate mt-1">Roman Mars</p>
+<p class="text-text-secondary text-xs font-medium mt-1">35m • Oct 12</p>
+</div>
+<div class="shrink-0 flex items-center">
+<button class="text-text-secondary hover:text-white p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<div class="h-24"></div> <!-- Spacer for mini player -->
+</main>
+<!-- Mini Player Dock -->
+<div class="absolute bottom-[60px] left-0 right-0 z-20 px-2">
+<div class="mx-auto max-w-2xl">
+<div class="relative flex items-center gap-3 overflow-hidden rounded-xl bg-surface-dark border border-white/5 p-2 shadow-2xl backdrop-blur-md">
+<!-- Progress Bar (Absolute Top) -->
+<div class="absolute left-0 top-0 h-[2px] w-full bg-white/10">
+<div class="h-full w-1/3 bg-primary"></div>
+</div>
+<!-- Artwork -->
+<div class="h-10 w-10 shrink-0 rounded bg-cover bg-center" data-alt="Small thumbnail of the currently playing podcast" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBeAYbxfEtdi-Whxs4mlf5z0jriABAytBQ4YRioRVEFATxJznvpecuQLTogzmtKa6sfyb_0JldAfBjPkT72zWvVwQh2ZfP1ST_A6aaeqH4SNBOcJvqcwnSGN_QCl4edQR8n3LT7c30s9OItXIh9I3LrqtHyHFqlbZj39SGi8vVKEpbrn9yguHAebuwWv9WTwyJJGHwGLt7TYv4KEldm-j71Jqd9yVr-AZovLQ4lu-dMYjI6TFdBmHzoko8xZGWgZELrudSDa71FLpw');"></div>
+<!-- Text Info -->
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<p class="text-sm font-bold text-white truncate">The Daily: The future of AI</p>
+<p class="text-xs text-text-secondary truncate">New York Times</p>
+</div>
+<!-- Controls -->
+<div class="flex items-center gap-1 pr-2">
+<button class="flex h-8 w-8 items-center justify-center rounded-full text-white hover:bg-white/10">
+<span class="material-symbols-outlined" style="font-size: 24px;">skip_previous</span>
+</button>
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black hover:bg-gray-200">
+<span class="material-symbols-outlined" style="font-size: 24px;">pause</span>
+</button>
+<button class="flex h-8 w-8 items-center justify-center rounded-full text-white hover:bg-white/10">
+<span class="material-symbols-outlined" style="font-size: 24px;">skip_next</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<nav class="flex-none h-[60px] bg-[#111722]/95 backdrop-blur border-t border-white/5 px-2 pb-safe z-30">
+<div class="flex h-full w-full items-center justify-around">
+<button class="group flex flex-1 flex-col items-center justify-center gap-1 text-primary">
+<span class="material-symbols-outlined fill-current">podcasts</span>
+<span class="text-[10px] font-medium">Episodes</span>
+</button>
+<button class="group flex flex-1 flex-col items-center justify-center gap-1 text-text-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined">queue_music</span>
+<span class="text-[10px] font-medium">Playlists</span>
+</button>
+<button class="group flex flex-1 flex-col items-center justify-center gap-1 text-text-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</button>
+</div>
+</nav>
+</div>
+</body></html>

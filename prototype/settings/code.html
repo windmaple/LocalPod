@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1A2230",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Toggle Switch Style */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #135bec;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #135bec;
+        }
+        
+        /* Hide scrollbar for cleaner look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased selection:bg-primary/30">
+<!-- Top App Bar -->
+<div class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center justify-between p-4 h-14">
+<button class="text-slate-900 dark:text-white flex items-center justify-center p-2 -ml-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">arrow_back_ios_new</span>
+</button>
+<h1 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-8">Settings</h1>
+<!-- Spacer for visual balance -->
+<div class="w-6"></div>
+</div>
+</div>
+<!-- Main Content -->
+<main class="w-full max-w-md mx-auto px-4 pt-6 pb-12 flex flex-col gap-6">
+<!-- Section: Library Management -->
+<section>
+<h3 class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider px-4 pb-2 ml-1">Library Management</h3>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-800/50">
+<!-- Item: Local Folder -->
+<div class="group relative flex items-center gap-4 px-4 py-3.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer border-b border-gray-100 dark:border-gray-700/50">
+<div class="flex items-center justify-center rounded-lg bg-blue-100 dark:bg-[#232f48] text-primary dark:text-blue-400 shrink-0 size-10">
+<span class="material-symbols-outlined text-[24px]">folder_open</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-base font-medium leading-normal line-clamp-1">Local Folder</p>
+<p class="text-gray-500 dark:text-[#92a4c9] text-sm font-normal leading-normal line-clamp-1 truncate">/storage/emulated/0/Podcasts</p>
+</div>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-600 text-[20px]">chevron_right</span>
+</div>
+<!-- Item: Scan -->
+<div class="group relative flex items-center gap-4 px-4 py-3.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<div class="flex items-center justify-center rounded-lg bg-green-100 dark:bg-[#232f48] text-green-600 dark:text-green-400 shrink-0 size-10">
+<span class="material-symbols-outlined text-[24px]">sync</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-base font-medium leading-normal">Scan for new episodes</p>
+</div>
+<button class="bg-primary/10 hover:bg-primary/20 text-primary text-sm font-semibold px-4 py-1.5 rounded-full transition-colors">
+                        Scan
+                    </button>
+</div>
+</div>
+<p class="text-xs text-gray-500 px-4 pt-2">Last scan: Today at 09:42 AM</p>
+</section>
+<!-- Section: Playback -->
+<section>
+<h3 class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider px-4 pb-2 ml-1">Playback</h3>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-800/50">
+<!-- Item: Auto-Play Toggle -->
+<div class="flex items-center justify-between px-4 py-3.5 border-b border-gray-100 dark:border-gray-700/50">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center rounded-lg bg-purple-100 dark:bg-[#232f48] text-purple-600 dark:text-purple-400 shrink-0 size-8">
+<span class="material-symbols-outlined text-[20px]">queue_music</span>
+</div>
+<p class="text-base font-medium">Auto-play next episode</p>
+</div>
+<!-- Toggle Switch -->
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-gray-200 dark:border-gray-600 appearance-none cursor-pointer transition-all duration-300 left-0 checked:left-6 checked:border-primary" id="autoplay-toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-200 dark:bg-gray-700 cursor-pointer transition-colors duration-300 checked:bg-primary" for="autoplay-toggle"></label>
+</div>
+</div>
+<!-- Item: Skip Silence Toggle -->
+<div class="flex items-center justify-between px-4 py-3.5 border-b border-gray-100 dark:border-gray-700/50">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center rounded-lg bg-orange-100 dark:bg-[#232f48] text-orange-600 dark:text-orange-400 shrink-0 size-8">
+<span class="material-symbols-outlined text-[20px]">graphic_eq</span>
+</div>
+<p class="text-base font-medium">Skip silence</p>
+</div>
+<!-- Toggle Switch Checked State Example -->
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-gray-200 dark:border-gray-600 appearance-none cursor-pointer transition-all duration-300 left-0 checked:left-6 checked:border-primary" id="silence-toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-200 dark:bg-gray-700 cursor-pointer transition-colors duration-300 checked:bg-primary" for="silence-toggle"></label>
+</div>
+</div>
+<!-- Item: Seek Duration -->
+<div class="group flex items-center justify-between px-4 py-3.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center rounded-lg bg-pink-100 dark:bg-[#232f48] text-pink-600 dark:text-pink-400 shrink-0 size-8">
+<span class="material-symbols-outlined text-[20px]">forward_30</span>
+</div>
+<p class="text-base font-medium">Seek Duration</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-gray-500 dark:text-[#92a4c9] text-base">30s / 15s</span>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-600 text-[20px]">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Appearance -->
+<section>
+<h3 class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider px-4 pb-2 ml-1">Appearance</h3>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-800/50">
+<!-- Item: Theme -->
+<div class="group flex items-center justify-between px-4 py-3.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center rounded-lg bg-indigo-100 dark:bg-[#232f48] text-indigo-600 dark:text-indigo-400 shrink-0 size-8">
+<span class="material-symbols-outlined text-[20px]">dark_mode</span>
+</div>
+<p class="text-base font-medium">App Theme</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-gray-500 dark:text-[#92a4c9] text-base">System Default</span>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-600 text-[20px]">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Info -->
+<div class="text-center py-6">
+<div class="inline-flex items-center justify-center p-3 rounded-2xl mb-4 bg-surface-light dark:bg-surface-dark shadow-sm border border-gray-200 dark:border-gray-800/50">
+<span class="material-symbols-outlined text-primary text-[32px]">podcasts</span>
+</div>
+<p class="text-sm font-semibold text-gray-900 dark:text-white">LocalCasts</p>
+<p class="text-xs text-gray-500 dark:text-gray-500 mt-1">Version 1.0.2 (Build 440)</p>
+</div>
+</main>
+</body></html>
