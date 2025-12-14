@@ -24,5 +24,8 @@ fun AppNavigation(viewModel: SharedViewModel) {
         composable("settings") {
             SettingsScreen(navController)
         }
+        composable("youtube_downloader") {
+            YouTubeDownloaderScreen(navController, viewModel)
+        }
     }
 }

@@ -34,11 +34,17 @@ import java.nio.charset.StandardCharsets
 @Composable
 fun PodcastLibraryScreen(navController: NavController, viewModel: SharedViewModel) {
     val context = LocalContext.current
+    val permission = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+        Manifest.permission.READ_MEDIA_AUDIO
+    } else {
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    }
+
     var hasPermission by remember {
         mutableStateOf(
             ContextCompat.checkSelfPermission(
                 context,
-                Manifest.permission.READ_MEDIA_AUDIO
+                permission
             ) == PackageManager.PERMISSION_GRANTED
         )
     }
@@ -104,7 +110,7 @@ fun PodcastLibraryScreen(navController: NavController, viewModel: SharedViewMode
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                                 Button(
-                                    onClick = { launcher.launch(Manifest.permission.READ_MEDIA_AUDIO) },
+                                    onClick = { launcher.launch(permission) },
                                     modifier = Modifier.align(Alignment.End)
                                 ) {
                                     Text("Allow Access")
@@ -157,6 +163,12 @@ fun PodcastLibraryScreen(navController: NavController, viewModel: SharedViewMode
                         label = { Text("Episodes") },
                         selected = true,
                         onClick = { }
+                    )
+                    NavigationBarItem(
+                        icon = { Icon(Icons.Filled.CloudDownload, contentDescription = "YouTube") },
+                        label = { Text("YouTube") },
+                        selected = false,
+                        onClick = { navController.navigate("youtube_downloader") }
                     )
                     NavigationBarItem(
                         icon = { Icon(Icons.Filled.Settings, contentDescription = "Settings") },

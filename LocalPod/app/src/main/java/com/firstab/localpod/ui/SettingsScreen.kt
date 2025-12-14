@@ -88,18 +88,7 @@ fun SettingsScreen(navController: NavController) {
                         }
                     )
                 }
-                item {
-                    var skipSilence by remember { mutableStateOf(preferencesManager.skipSilence) }
-                    ListItem(
-                        headlineContent = { Text("Skip silence") },
-                        trailingContent = {
-                            Switch(checked = skipSilence, onCheckedChange = {
-                                skipSilence = it
-                                preferencesManager.skipSilence = it
-                            })
-                        }
-                    )
-                }
+
                 item {
                     ListItem(
                         headlineContent = { Text("Seek Duration") },

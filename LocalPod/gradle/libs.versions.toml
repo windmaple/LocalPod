@@ -11,7 +11,7 @@ composeBom = "2024.09.00"
 navigationCompose = "2.7.0"
 materialIconsExtendedVersion = "1.6.0-alpha01"
 coreSplashScreen = "1.0.1"
-
+chaquopy = "17.0"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

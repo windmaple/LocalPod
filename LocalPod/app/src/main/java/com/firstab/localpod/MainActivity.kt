@@ -9,7 +9,6 @@ import com.firstab.localpod.ui.theme.LocalPodTheme
 
 import androidx.activity.viewModels
 import com.firstab.localpod.SharedViewModel
-
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : ComponentActivity() {
