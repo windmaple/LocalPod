@@ -2,4 +2,9 @@
 <resources>
 
     <style name="Theme.LocalPod" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.LocalPod.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@android:color/black</item>
+        <item name="postSplashScreenTheme">@style/Theme.LocalPod</item>
+    </style>
 </resources>

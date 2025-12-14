@@ -10,11 +10,14 @@ import com.firstab.localpod.ui.theme.LocalPodTheme
 import androidx.activity.viewModels
 import com.firstab.localpod.SharedViewModel
 
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+
 class MainActivity : ComponentActivity() {
     private val viewModel: SharedViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         enableEdgeToEdge()
         setContent {
             LocalPodTheme {
