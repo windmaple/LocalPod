@@ -1,6 +1,7 @@
 package com.firstab.localpod
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -8,10 +9,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import android.media.MediaPlayer
 
-class SharedViewModel : ViewModel() {
+class SharedViewModel(application: Application) : AndroidViewModel(application) {
     private val _mediaPlayer = MediaPlayer()
     val mediaPlayer: MediaPlayer
         get() = _mediaPlayer
+
+    private val preferencesManager = PreferencesManager(application)
 
     private val _isPlaying = MutableStateFlow(false)
     val isPlaying = _isPlaying.asStateFlow()
@@ -22,13 +25,34 @@ class SharedViewModel : ViewModel() {
     private val _currentEpisode = MutableStateFlow<PodcastEpisode?>(null)
     val currentEpisode = _currentEpisode.asStateFlow()
 
+    private var episodes: List<PodcastEpisode> = emptyList()
+
+    fun setEpisodes(episodes: List<PodcastEpisode>) {
+        this.episodes = episodes
+    }
+
     fun playEpisode(episode: PodcastEpisode) {
         _currentEpisode.value = episode
         _mediaPlayer.reset()
         _mediaPlayer.setDataSource(episode.path)
         _mediaPlayer.prepare()
         _mediaPlayer.start()
+        _mediaPlayer.isLooping = false
+        _mediaPlayer.setOnCompletionListener { playNextEpisode() }
         _isPlaying.value = true
+
+        if (preferencesManager.skipSilence) {
+            _mediaPlayer.playbackParams = _mediaPlayer.playbackParams.setAudioFallbackMode(2)
+        }
+    }
+
+    fun playNextEpisode() {
+        if (preferencesManager.autoplay) {
+            val currentIndex = episodes.indexOf(currentEpisode.value)
+            if (currentIndex != -1 && currentIndex < episodes.size - 1) {
+                playEpisode(episodes[currentIndex + 1])
+            }
+        }
     }
 
     fun togglePlayback() {
@@ -57,3 +81,4 @@ class SharedViewModel : ViewModel() {
         _mediaPlayer.release()
     }
 }
+

@@ -57,6 +57,7 @@ fun PodcastLibraryScreen(navController: NavController, viewModel: SharedViewMode
             episodes = folder.listFiles { _, name -> name.endsWith(".mp3") }?.map {
                 PodcastEpisode(it.nameWithoutExtension, "Unknown Artist", it.absolutePath)
             } ?: emptyList()
+            viewModel.setEpisodes(episodes)
         }
     }
 
@@ -131,8 +132,8 @@ fun PodcastLibraryScreen(navController: NavController, viewModel: SharedViewMode
             }
         },
         bottomBar = {
-            currentEpisode?.let {
-                Column {
+            Column {
+                currentEpisode?.let {
                     Row(
                         modifier = Modifier.padding(8.dp),
                         verticalAlignment = Alignment.CenterVertically
@@ -149,20 +150,20 @@ fun PodcastLibraryScreen(navController: NavController, viewModel: SharedViewMode
                             )
                         }
                     }
-                    NavigationBar {
-                        NavigationBarItem(
-                            icon = { Icon(Icons.Filled.Podcasts, contentDescription = "Episodes") },
-                            label = { Text("Episodes") },
-                            selected = true,
-                            onClick = { }
-                        )
-                        NavigationBarItem(
-                            icon = { Icon(Icons.Filled.Settings, contentDescription = "Settings") },
-                            label = { Text("Settings") },
-                            selected = false,
-                            onClick = { navController.navigate("settings") }
-                        )
-                    }
+                }
+                NavigationBar {
+                    NavigationBarItem(
+                        icon = { Icon(Icons.Filled.Podcasts, contentDescription = "Episodes") },
+                        label = { Text("Episodes") },
+                        selected = true,
+                        onClick = { }
+                    )
+                    NavigationBarItem(
+                        icon = { Icon(Icons.Filled.Settings, contentDescription = "Settings") },
+                        label = { Text("Settings") },
+                        selected = false,
+                        onClick = { navController.navigate("settings") }
+                    )
                 }
             }
         }

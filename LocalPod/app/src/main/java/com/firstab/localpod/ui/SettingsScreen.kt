@@ -1,6 +1,8 @@
 package com.firstab.localpod.ui
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -8,21 +10,23 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material.icons.filled.Sync
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.firstab.localpod.PreferencesManager
 import com.firstab.localpod.ui.theme.LocalPodTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(navController: NavController) {
     val context = LocalContext.current
+    val preferencesManager = remember { PreferencesManager(context) }
+    var showSeekDurationDialog by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -73,20 +77,26 @@ fun SettingsScreen(navController: NavController) {
                     )
                 }
                 item {
-                    val checkedState = remember { mutableStateOf(true) }
+                    var autoplay by remember { mutableStateOf(preferencesManager.autoplay) }
                     ListItem(
                         headlineContent = { Text("Auto-play next episode") },
                         trailingContent = {
-                            Switch(checked = checkedState.value, onCheckedChange = { checkedState.value = it })
+                            Switch(checked = autoplay, onCheckedChange = {
+                                autoplay = it
+                                preferencesManager.autoplay = it
+                            })
                         }
                     )
                 }
                 item {
-                    val checkedState = remember { mutableStateOf(true) }
+                    var skipSilence by remember { mutableStateOf(preferencesManager.skipSilence) }
                     ListItem(
                         headlineContent = { Text("Skip silence") },
                         trailingContent = {
-                            Switch(checked = checkedState.value, onCheckedChange = { checkedState.value = it })
+                            Switch(checked = skipSilence, onCheckedChange = {
+                                skipSilence = it
+                                preferencesManager.skipSilence = it
+                            })
                         }
                     )
                 }
@@ -94,8 +104,9 @@ fun SettingsScreen(navController: NavController) {
                     ListItem(
                         headlineContent = { Text("Seek Duration") },
                         trailingContent = {
-                            Text("30s / 15s")
-                        }
+                            Text("${preferencesManager.seekDuration}s")
+                        },
+                        modifier = Modifier.clickable { showSeekDurationDialog = true }
                     )
                 }
                 item {
@@ -116,6 +127,24 @@ fun SettingsScreen(navController: NavController) {
             }
         }
     )
+
+    if (showSeekDurationDialog) {
+        AlertDialog(
+            onDismissRequest = { showSeekDurationDialog = false },
+            title = { Text("Seek Duration") },
+            text = {
+                Column {
+                    Text("Forward:")
+                    Slider(value = preferencesManager.seekDuration.toFloat(), onValueChange = { preferencesManager.seekDuration = it.toInt() }, valueRange = 5f..60f)
+                }
+            },
+            confirmButton = {
+                Button(onClick = { showSeekDurationDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
 }
 
 @Preview(showBackground = true)
