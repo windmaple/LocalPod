@@ -164,12 +164,7 @@ fun PodcastLibraryScreen(navController: NavController, viewModel: SharedViewMode
                         selected = true,
                         onClick = { }
                     )
-                    NavigationBarItem(
-                        icon = { Icon(Icons.Filled.CloudDownload, contentDescription = "YouTube") },
-                        label = { Text("YouTube") },
-                        selected = false,
-                        onClick = { navController.navigate("youtube_downloader") }
-                    )
+
                     NavigationBarItem(
                         icon = { Icon(Icons.Filled.Settings, contentDescription = "Settings") },
                         label = { Text("Settings") },
