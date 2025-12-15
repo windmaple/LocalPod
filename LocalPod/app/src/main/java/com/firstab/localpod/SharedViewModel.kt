@@ -28,10 +28,11 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
 
 
-    private var episodes: List<PodcastEpisode> = emptyList()
+    private val _episodes = MutableStateFlow<List<PodcastEpisode>>(emptyList())
+    val episodes = _episodes.asStateFlow()
 
     fun setEpisodes(episodes: List<PodcastEpisode>) {
-        this.episodes = episodes
+        _episodes.value = episodes
     }
 
     fun playEpisode(episode: PodcastEpisode) {
@@ -47,9 +48,9 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     fun playNextEpisode() {
         if (preferencesManager.autoplay) {
-            val currentIndex = episodes.indexOf(currentEpisode.value)
-            if (currentIndex != -1 && currentIndex < episodes.size - 1) {
-                playEpisode(episodes[currentIndex + 1])
+            val currentIndex = _episodes.value.indexOf(currentEpisode.value)
+            if (currentIndex != -1 && currentIndex < _episodes.value.size - 1) {
+                playEpisode(_episodes.value[currentIndex + 1])
             }
         }
     }

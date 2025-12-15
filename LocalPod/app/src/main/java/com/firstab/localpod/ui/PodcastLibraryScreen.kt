@@ -55,15 +55,16 @@ fun PodcastLibraryScreen(navController: NavController, viewModel: SharedViewMode
         }
     )
 
-    var episodes by remember { mutableStateOf(emptyList<PodcastEpisode>()) }
+    var searchQuery by remember { mutableStateOf("") }
+    val episodes by viewModel.episodes.collectAsState()
+    val filteredEpisodes = episodes.filter { it.title.contains(searchQuery, ignoreCase = true) || it.artist.contains(searchQuery, ignoreCase = true) }
 
     fun scanForEpisodes() {
         val folder = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Podcasts")
         if (folder.exists()) {
-            episodes = folder.listFiles { _, name -> name.endsWith(".mp3") }?.map {
+            viewModel.setEpisodes(folder.listFiles { _, name -> name.endsWith(".mp3") }?.map {
                 PodcastEpisode(it.nameWithoutExtension, "Unknown Artist", it.absolutePath)
-            } ?: emptyList()
-            viewModel.setEpisodes(episodes)
+            } ?: emptyList())
         }
     }
 
@@ -91,9 +92,8 @@ fun PodcastLibraryScreen(navController: NavController, viewModel: SharedViewMode
             LazyColumn(modifier = Modifier.padding(innerPadding)) {
                 item {
                     OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
-                        label = { Text("Search titles or artists...") },
+                        value = searchQuery,
+                        onValueChange = { searchQuery = it },                        label = { Text("Search titles or artists...") },
                         leadingIcon = {
                             Icon(Icons.Filled.Search, contentDescription = "Search")
                         },
@@ -119,7 +119,7 @@ fun PodcastLibraryScreen(navController: NavController, viewModel: SharedViewMode
                         }
                     }
                 }
-                items(episodes) { episode ->
+                items(filteredEpisodes) { episode ->
                     ListItem(
                         headlineContent = { Text(episode.title) },
                         supportingContent = { Text(episode.artist) },
